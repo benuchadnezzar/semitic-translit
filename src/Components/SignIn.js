@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Auth } from 'aws-amplify';
 
-class Admin extends Component {
+class SignIn extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,9 +15,14 @@ class Admin extends Component {
 		this.setState({[key]: value})
 	}
 
+	signIn = () => {
+		Auth.signIn(this.state.username, this.state.password)
+			.then(user => this.setState({ user }))
+			.catch(err => console.log('Error signing in: ', err))
+	}
+
 	render() {
 		return (
-			<h2>Please sign in</h2>
 			<input 
 				placeholder='Username'
 				onChange={e => this.handleChange(username, e.target.value)}
@@ -27,8 +32,9 @@ class Admin extends Component {
 				type='password'
 				onChange={e => this.handleChange(password, e.target.value)}
 			/>
+			<button onClick={this.signIn}>Sign in</button>
 		)
 	}
 }
 
-export default Admin;
+export default SignIn;

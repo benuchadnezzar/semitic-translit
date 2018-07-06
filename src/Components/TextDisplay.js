@@ -9,4 +9,8 @@ function TextDisplay (props) {
 	)
 }
 
+TextDisplay.PropTypes = {
+	textDisplay: PropTypes.string.isRequired
+};
+
 export default TextDisplay;
